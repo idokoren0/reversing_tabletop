@@ -1,6 +1,5 @@
 from PIL import Image
 import os
-import colorgram
 from imagedominantcolor import DominantColor
 
 # Crops The Image into Cards , Accepts as input file to perform action on, where to output results and to how many pieces to cut image (H,W)
@@ -23,21 +22,6 @@ def imgcrop(input, output_dir, xPieces, yPieces):
                 pass
 
 
-def is_almost_one_color(image_path, threshold):
-    # Extract dominant color
-    colors = colorgram.extract(image_path, 1)
-    dominant_color = colors[0].rgb
-
-    # Check percentage of dominant color in the image
-    pixels = image_path.getdata()
-    dominant_pixels = [1 for pixel in pixels if pixel == dominant_color]
-    percentage = (sum(dominant_pixels) / len(pixels)) * 100
-
-    # Save the image if the percentage is above the threshold
-    if percentage > threshold:
-        return True
-    else:
-        return False
 
 
 def is_almost_one_color2(image_path, threshold):
