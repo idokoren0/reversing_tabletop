@@ -26,9 +26,34 @@ def retrive_workshopFileInfo_json():
 
 
 
-def download_images():
-    return
+def parsejson(modFile_path):
+    try:
+        with open(modFile_path, 'r') as f:
+            mod = json.load(f)
+    except FileNotFoundError:
+        print("The file WorkshopFileInfos.json does not exist at the specified path.")
+        return
+    deck_dicts = []
+    for x in mod['ObjectStates']:
+        saved_dicts_id = set()
+        try:
+            first_key = list(x["CustomDeck"].keys())[0]
+            if first_key not in saved_dicts_id:
+                deck_dicts.append(x["CustomDeck"])
+                saved_dicts_id.add(first_key)
+        except KeyError:
+            pass
+    return deck_dicts
+        
+    #print(mod["ObjectStates": "36"])
+    #print(len(mod["ObjectStates"]))
+    #for x in mod["ObjectStates"]:
+    #    print(x)
+    #    if x == "CustomDeck":
+    #        print(x)
 
+
+        
 # Crops The Image into Cards , Accepts as input file to perform action on, where to output results and to how many pieces to cut image (H,W)
 def imgcrop(uncroped_image, output_dir, xPieces, yPieces):
     filename , file_extension = os.path.splitext(os.path.basename(uncroped_image))
@@ -50,7 +75,9 @@ def imgcrop(uncroped_image, output_dir, xPieces, yPieces):
 
 
 if __name__ == "__main__":
-    print(retrive_workshopFileInfo_json())
+    
+    print(parsejson(modFile_path=retrive_workshopFileInfo_json()))
+
     
     """
     first_batch_path = "C:\\Users\\Ido\\Pictures\\python_tabletop\\raw_cards\\HGeVDgI.jpg"
