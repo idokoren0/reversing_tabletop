@@ -3,8 +3,13 @@ import os
 import json
 
 def retrive_workshopFileInfo_json():
-    path_to_workshop_file_info = r"C:\Users\Ido\Documents\My Games\Tabletop Simulator\Mods\Workshop\WorkshopFileInfos.json"
     
+    platform = input("Input l for latpop or d for desktop: ")
+    if platform == "l":
+        path_to_workshop_file_info = r"C:\Users\Ido\Documents\My Games\Tabletop Simulator\Mods\Workshop\WorkshopFileInfos.json"
+    elif platform == "d":
+        path_to_workshop_file_info = r"C:\Users\2003i\Documents\My Games\Tabletop Simulator\Mods\Workshop\WorkshopFileInfos.json"
+
     try:
         with open(path_to_workshop_file_info, 'r') as f:
             workhopFileInfo = json.load(f)
